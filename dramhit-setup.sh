@@ -227,14 +227,9 @@ process_fastq() {
 }
 
 build_all() {
-
-  record_log "Processing fastq";
   process_fastq;
-  record_log "Building incrementer";
   build_incrementer;
-  record_log "Building dramhit";
   build_dramhit;
-  record_log "Building chtkc";
   build_chtkc;
 }
 
@@ -263,6 +258,5 @@ record_log "Build all";
 build_all;
 record_log "Setting user stuff";
 setup_user;
-
 #export TERM=linux
 record_log "Done Setting up!"
