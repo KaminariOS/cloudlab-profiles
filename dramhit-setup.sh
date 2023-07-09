@@ -165,6 +165,8 @@ download_datasets() {
   if [ $? -ne 0 ]; then
     echo "Downloaded files likely corrupted!"
   fi
+
+  wget "https://zenodo.org/record/3736457/files/1_control_18S_2019_minq7%20-%20Copy.fastq?download=1" -O sample.fastq
   popd
 }
 
