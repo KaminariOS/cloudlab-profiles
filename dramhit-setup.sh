@@ -56,12 +56,12 @@ install_dependencies() {
 
 create_extfs() {
   record_log "Creating ext4 filesystem on /dev/sda3"
-  sudo mkfs.ext4 -Fq /dev/sda3
+  # sudo mkfs.ext4 -Fq /dev/sda3
 }
 
 mountfs() {
   sudo mkdir -p ${MOUNT_DIR}
-  sudo mount -t ext4 /dev/sda3 ${MOUNT_DIR}
+  # sudo mount -t ext4 /dev/sda3 ${MOUNT_DIR}
 
   #sudo mkdir -p /nix
   #sudo mount -t ext4 /dev/sda3 /nix 
@@ -100,7 +100,7 @@ prepare_machine() {
   sudo mount --bind ${MOUNT_DIR}/nix /nix
 
   sudo cp -r /users/Kosumi ${MOUNT_DIR}
-  sudo mount --bind ${MOUNT_DIR}/Kosumi /users/Kosumi
+  # sudo mount --bind ${MOUNT_DIR}/Kosumi /users/Kosumi
 
   install_dependencies
 }
