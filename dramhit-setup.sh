@@ -55,16 +55,16 @@ install_dependencies() {
 }
 
 create_extfs() {
-  record_log "Creating ext4 filesystem on /dev/sda4"
-  sudo mkfs.ext4 -Fq /dev/sda4
+  record_log "Creating ext4 filesystem on /dev/sda3"
+  sudo mkfs.ext4 -Fq /dev/sda3
 }
 
 mountfs() {
   sudo mkdir -p ${MOUNT_DIR}
-  sudo mount -t ext4 /dev/sda4 ${MOUNT_DIR}
+  sudo mount -t ext4 /dev/sda3 ${MOUNT_DIR}
 
   #sudo mkdir -p /nix
-  #sudo mount -t ext4 /dev/sda4 /nix 
+  #sudo mount -t ext4 /dev/sda3 /nix 
 
   if [[ $? != 0 ]]; then
     record_log "Partition might be corrupted"
@@ -78,14 +78,14 @@ mountfs() {
 prepare_local_partition() {
   record_log "Preparing local partition ..."
 
-  MOUNT_POINT=$(mount -v | grep "/dev/sda4" | awk '{print $3}' ||:)
+  MOUNT_POINT=$(mount -v | grep "/dev/sda3" | awk '{print $3}' ||:)
 
   if [[ x"${MOUNT_POINT}" == x"${MOUNT_DIR}" ]];then
-    record_log "/dev/sda4 is already mounted on ${MOUNT_POINT}"
+    record_log "/dev/sda3 is already mounted on ${MOUNT_POINT}"
     return
   fi
 
-  if [ x$(sudo file -sL /dev/sda4 | grep -o ext4) == x"" ]; then
+  if [ x$(sudo file -sL /dev/sda3 | grep -o ext4) == x"" ]; then
     create_extfs;
   fi
 
@@ -98,6 +98,9 @@ prepare_machine() {
   sudo mkdir /nix
   sudo cp -r /nix ${MOUNT_DIR}
   sudo mount --bind ${MOUNT_DIR}/nix /nix
+
+  sudo cp -r /users/Kosumi ${MOUNT_DIR}
+  sudo mount --bind ${MOUNT_DIR}/Kosumi /users/Kosumi
 
   install_dependencies
 }
