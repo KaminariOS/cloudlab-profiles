@@ -114,7 +114,7 @@ prepare_home() {
   sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
 
   pushd /users/geniuser
-  nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
+  nix build github:KaminariOS/nixpkgs/no_build_tools#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
   sudo cp -r result ${HOME_U}/result
   popd 
 }
