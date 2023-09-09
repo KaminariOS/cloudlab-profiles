@@ -2,13 +2,14 @@
 
 set -eo pipefail
 
-MOUNT_DIR=/opt/dramhit
+MOUNT_DIR=/mydata
 LOG_FILE=${HOME}/dramhit-setup.log
 LLVM_VERSION=10
 NIX_DAEMON_VARS="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 NIX_NO_DAEMON_VARS="$HOME/.nix-profile/etc/profile.d/nix.sh"
 DATASET_DIR=${MOUNT_DIR}/kmer_dataset
 SRA_HOME=${MOUNT_DIR}/sratoolkit
+USERNAME=Kosumi
 
 USER=${SUDO_USER}
 
@@ -100,7 +101,8 @@ prepare_machine() {
   sudo mount --bind ${MOUNT_DIR}/nix /nix
 
   sudo cp -r /users/Kosumi ${MOUNT_DIR}
-  # sudo mount --bind ${MOUNT_DIR}/Kosumi /users/Kosumi
+  sudo mount --bind ${MOUNT_DIR}/${USERNAME} /users/${USERNAME}
+  sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
 
   install_dependencies
 }
@@ -243,7 +245,6 @@ setup_system() {
   sudo ${MOUNT_DIR}/dramhit/scripts/min-setup.sh
 }
 
-USERNAME=Kosumi
 setup_user() {
 
     record_log "change own";
