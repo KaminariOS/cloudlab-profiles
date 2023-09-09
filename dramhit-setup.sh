@@ -103,10 +103,6 @@ clone_cheri_repos() {
 
 prepare_home() {
 
-  pushd /users/geniuser
-  nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
-  sudo cp result ${HOME_U}/result
-  popd /users/geniuser
 
   clone_cheri_repos
 
@@ -114,6 +110,11 @@ prepare_home() {
   sudo cp -r ${HOME_U} ${MOUNT_DIR}
   sudo mount --bind ${MOUNT_DIR}/${USERNAME} ${HOME_U}
   sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
+
+  pushd /users/geniuser
+  nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
+  sudo cp -r result ${HOME_U}/result
+  popd /users/geniuser
 }
 
 prepare_machine() {
