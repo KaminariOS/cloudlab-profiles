@@ -12,7 +12,7 @@ pc = portal.Context()
 request = pc.makeRequestRSpec()
 
 node_0 = request.RawPC('node-0')
-node_0.hardware_type = 'c6420'
+node_0.hardware_type = 'c8220'
 node_0.disk_image = 'urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD'
 bs = node_0.Blockstore("bs", "/mydata")
 bs.size = "512GB"
