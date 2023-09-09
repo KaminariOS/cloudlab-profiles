@@ -103,9 +103,11 @@ clone_cheri_repos() {
 
 prepare_home() {
 
+  pushd /users/geniuser
   nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
   sudo cp result ${HOME_U}/result
-  
+  popd /users/geniuser
+
   clone_cheri_repos
 
   sudo echo fish >> ${HOME_U}/.bashrc
