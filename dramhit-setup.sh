@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -10,6 +10,7 @@ NIX_NO_DAEMON_VARS="$HOME/.nix-profile/etc/profile.d/nix.sh"
 DATASET_DIR=${MOUNT_DIR}/kmer_dataset
 SRA_HOME=${MOUNT_DIR}/sratoolkit
 USERNAME=Kosumi
+HOME_U=/users/${USERNAME}
 
 USER=${SUDO_USER}
 
@@ -93,6 +94,26 @@ prepare_local_partition() {
   mountfs
 }
 
+clone_cheri_repos() {
+  pushd ${HOME_U}
+  git clone https://github.com/kent-weak-memory/rust.git
+  git clone https://github.com/CTSRD-CHERI/cheribuild.git 
+  popd ${HOME_U}
+}
+
+prepare_home() {
+
+  nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
+  sudo cp result ${HOME_U}/result
+  
+  clone_cheri_repos
+
+  sudo echo fish >> ${HOME_U}/.bashrc
+  sudo cp -r ${HOME_U} ${MOUNT_DIR}
+  sudo mount --bind ${MOUNT_DIR}/${USERNAME} ${HOME_U}
+  sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
+}
+
 prepare_machine() {
   prepare_local_partition
 
@@ -100,11 +121,9 @@ prepare_machine() {
   sudo cp -r /nix ${MOUNT_DIR}
   sudo mount --bind ${MOUNT_DIR}/nix /nix
 
-  sudo cp -r /users/Kosumi ${MOUNT_DIR}
-  sudo mount --bind ${MOUNT_DIR}/${USERNAME} /users/${USERNAME}
-  sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
 
   install_dependencies
+
 }
 
 # Clone all repos
@@ -265,4 +284,6 @@ prepare_machine;
 # record_log "Setting user stuff";
 # setup_user;
 #export TERM=linux
+prepare_home;
 record_log "Done Setting up!"
+
