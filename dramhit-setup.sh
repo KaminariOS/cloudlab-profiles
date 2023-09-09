@@ -100,7 +100,7 @@ clone_cheri_repos() {
   sudo git clone https://github.com/CTSRD-CHERI/cheribuild.git 
   popd 
   
-  sudo apt install autoconf automake libtool pkg-config clang bison cmake mercurial ninja-build samba flex texinfo time libglib2.0-dev libpixman-1-dev libarchive-dev libarchive-tools libbz2-dev libattr1-dev libcap-ng-dev libexpat1-dev libgmp-dev
+  sudo apt install -y autoconf automake libtool pkg-config clang bison cmake mercurial ninja-build samba flex texinfo time libglib2.0-dev libpixman-1-dev libarchive-dev libarchive-tools libbz2-dev libattr1-dev libcap-ng-dev libexpat1-dev libgmp-dev
 }
 
 prepare_home() {
