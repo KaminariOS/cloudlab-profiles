@@ -98,7 +98,7 @@ clone_cheri_repos() {
   pushd ${HOME_U}
   sudo git clone https://github.com/kent-weak-memory/rust.git
   sudo git clone https://github.com/CTSRD-CHERI/cheribuild.git 
-  popd ${HOME_U}
+  popd 
   
   sudo apt install autoconf automake libtool pkg-config clang bison cmake mercurial ninja-build samba flex texinfo time libglib2.0-dev libpixman-1-dev libarchive-dev libarchive-tools libbz2-dev libattr1-dev libcap-ng-dev libexpat1-dev libgmp-dev
 }
@@ -116,7 +116,7 @@ prepare_home() {
   pushd /users/geniuser
   nix build github:KaminariOS/nixpkgs/dev#homeConfigurations.shellhome.activationPackage --extra-experimental-features nix-command --extra-experimental-features flakes
   sudo cp -r result ${HOME_U}/result
-  popd /users/geniuser
+  popd 
 }
 
 prepare_machine() {
