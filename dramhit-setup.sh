@@ -99,6 +99,8 @@ clone_cheri_repos() {
   git clone https://github.com/kent-weak-memory/rust.git
   git clone https://github.com/CTSRD-CHERI/cheribuild.git 
   popd ${HOME_U}
+  
+  sudo apt install autoconf automake libtool pkg-config clang bison cmake mercurial ninja-build samba flex texinfo time libglib2.0-dev libpixman-1-dev libarchive-dev libarchive-tools libbz2-dev libattr1-dev libcap-ng-dev libexpat1-dev libgmp-dev
 }
 
 prepare_home() {
@@ -127,6 +129,7 @@ prepare_machine() {
 
   install_dependencies
 
+  sudo apt update
 }
 
 # Clone all repos
