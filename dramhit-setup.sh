@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -eo pipefail
+set -eo pipefail
 
 MOUNT_DIR=/mydata
 LOG_FILE=${HOME}/dramhit-setup.log
@@ -108,7 +108,7 @@ prepare_home() {
 
   clone_cheri_repos
 
-  sudo echo fish >> ${HOME_U}/.bashrc
+  # sudo echo fish >> ${HOME_U}/.bashrc
   sudo cp -r ${HOME_U} ${MOUNT_DIR}
   sudo mount --bind ${MOUNT_DIR}/${USERNAME} ${HOME_U}
   sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
