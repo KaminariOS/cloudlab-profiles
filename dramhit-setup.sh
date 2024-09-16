@@ -106,7 +106,7 @@ clone_cheri_repos() {
 prepare_home() {
 
 
-  clone_cheri_repos
+  # clone_cheri_repos
 
   # sudo echo fish >> ${HOME_U}/.bashrc
   sudo cp -r ${HOME_U} ${MOUNT_DIR}
