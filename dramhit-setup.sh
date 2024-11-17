@@ -279,8 +279,36 @@ setup_user() {
     # sudo ln -s $(which nix-store) /usr/local/bin/nix-store
 }
 
+setup_drust() {
+    wget https://content.mellanox.com/ofed/MLNX_OFED-4.9-2.2.4.0/MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64.tgz
+    tar xzf MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64.tgz
+    cd MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64
+
+    # Remove the incompatible libraries
+    sudo apt remove ibverbs-providers:amd64 librdmacm1:amd64 librdmacm-dev:amd64 libibverbs-dev:amd64 libopensm5a libosmvendor4 libosmcomp3 -y
+
+    # Install the MLNX OFED driver against the kernel 5.4.0
+    sudo ./mlnxofedinstall --add-kernel-support
+
+    sudo systemctl enable openibd
+    sudo systemctl start  openibd
+
+    sudo systemctl enable opensmd
+    sudo systemctl start opensmd
+
+    sudo apt remove cargo rustc
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    source "$HOME/.cargo/env"
+    # fix the toolchain version to nightly-2023-04-25 to avoid dependency errors
+    rustup toolchain install nightly-2023-04-25
+    rustup default nightly-2023-04-25
+
+    echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+}
+
 record_log "Prepare_machine";
-prepare_machine;
+setup_drust
+# prepare_machine;
 # record_log "Clone repos";
 # clone_repos;
 # record_log "Setting up system";
@@ -290,6 +318,6 @@ prepare_machine;
 # record_log "Setting user stuff";
 # setup_user;
 #export TERM=linux
-prepare_home;
+# prepare_home;
 record_log "Done Setting up!"
 
