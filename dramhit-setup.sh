@@ -304,6 +304,13 @@ setup_drust() {
     rustup default nightly-2023-04-25
 
     echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
+
+    sudo mkdir -p ${MOUNT_DIR}
+
+    pushd ${MOUNT_DIR}
+    mkdir DRust_home
+    cd DRust_home
+    git clone git@github.com:uclasystem/DRust.git
 }
 
 record_log "Prepare_machine";
