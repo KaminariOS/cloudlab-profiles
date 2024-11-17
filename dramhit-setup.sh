@@ -297,7 +297,7 @@ setup_drust() {
     sudo systemctl start opensmd
 
     sudo apt remove cargo rustc
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source "$HOME/.cargo/env"
     # fix the toolchain version to nightly-2023-04-25 to avoid dependency errors
     rustup toolchain install nightly-2023-04-25
