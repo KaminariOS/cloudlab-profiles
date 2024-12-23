@@ -239,9 +239,9 @@ setup_system() {
 }
 
 prepare_machine;
-clone_repos;
-build_all;
-setup_system;
+# clone_repos;
+# build_all;
+# setup_system;
 
 
 sudo ln -s $(which nix-store) /usr/local/bin/nix-store
