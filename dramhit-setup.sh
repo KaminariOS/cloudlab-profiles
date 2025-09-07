@@ -266,8 +266,10 @@ build_all() {
 }
 
 setup_system() {
-  record_log "Running setup scripts"
-  sudo ${MOUNT_DIR}/dramhit/scripts/min-setup.sh
+  sudo apt update
+  sudo apt-get install clang
+  # record_log "Running setup scripts"
+  # sudo ${MOUNT_DIR}/dramhit/scripts/min-setup.sh
 }
 
 setup_user() {
@@ -283,8 +285,8 @@ record_log "Prepare_machine";
 prepare_machine;
 # record_log "Clone repos";
 # clone_repos;
-# record_log "Setting up system";
-# setup_system;
+record_log "Setting up system";
+setup_system;
 # record_log "Build all";
 # build_all;
 # record_log "Setting user stuff";
