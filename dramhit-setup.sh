@@ -124,7 +124,7 @@ prepare_machine() {
 
   sudo mkdir /nix
   sudo cp -r /nix ${MOUNT_DIR}
-  sudo mount --bind ${MOUNT_DIR}/nix /nix
+  # sudo mount --bind ${MOUNT_DIR}/nix /nix
 
 
   install_dependencies
