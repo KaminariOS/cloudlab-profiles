@@ -120,10 +120,10 @@ prepare_home() {
 }
 
 prepare_machine() {
-  prepare_local_partition
+  # prepare_local_partition
 
-  sudo mkdir /nix
-  sudo cp -r /nix ${MOUNT_DIR}
+  # sudo mkdir /nix
+  # sudo cp -r /nix ${MOUNT_DIR}
   # sudo mount --bind ${MOUNT_DIR}/nix /nix
 
 
@@ -301,6 +301,6 @@ setup_system;
 # record_log "Setting user stuff";
 # setup_user;
 #export TERM=linux
-prepare_home;
+# prepare_home;
 record_log "Done Setting up!"
 
