@@ -266,8 +266,17 @@ build_all() {
 }
 
 setup_system() {
-  sudo apt update
-  sudo apt-get install clang
+        sudo apt-get update -y
+        sudo apt install -y software-properties-common
+        sudo add-apt-repository ppa:deadsnakes/ppa
+        sudo apt-get update -y
+
+        sudo apt install -y python3.11 python3.11-venv python3.11-dev
+
+        [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+        chmod +x ./kind
+        sudo cp ./kind /usr/local/bin/kind
+        rm -rf kind
   # record_log "Running setup scripts"
   # sudo ${MOUNT_DIR}/dramhit/scripts/min-setup.sh
 }
