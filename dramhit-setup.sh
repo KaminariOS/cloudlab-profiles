@@ -110,7 +110,7 @@ prepare_home() {
 
   # sudo echo fish >> ${HOME_U}/.bashrc
   sudo cp -r ${HOME_U} ${MOUNT_DIR}
-  sudo mount --bind ${MOUNT_DIR}/${USERNAME} ${HOME_U}
+  # sudo mount --bind ${MOUNT_DIR}/${USERNAME} ${HOME_U}
   sudo chown -R ${USERNAME} ${MOUNT_DIR}/${USERNAME} 
 
   pushd /users/geniuser
@@ -120,11 +120,11 @@ prepare_home() {
 }
 
 prepare_machine() {
-  prepare_local_partition
+  # prepare_local_partition
 
-  sudo mkdir /nix
-  sudo cp -r /nix ${MOUNT_DIR}
-  sudo mount --bind ${MOUNT_DIR}/nix /nix
+  # sudo mkdir /nix
+  # sudo cp -r /nix ${MOUNT_DIR}
+  # sudo mount --bind ${MOUNT_DIR}/nix /nix
 
 
   install_dependencies
@@ -292,6 +292,6 @@ setup_system;
 # record_log "Setting user stuff";
 # setup_user;
 #export TERM=linux
-prepare_home;
+# prepare_home;
 record_log "Done Setting up!"
 
